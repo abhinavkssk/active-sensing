@@ -1,0 +1,310 @@
+
+
+\documentclass[letterpaper,10pt]{article}
+\newlength{\outerbordwidth}
+\pagestyle{empty}
+\raggedbottom
+\raggedright
+\usepackage[svgnames]{xcolor}
+\usepackage{enumerate}
+\usepackage{framed}
+\usepackage{longtable}
+\usepackage{revnum}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tocloft}
+\usepackage{hyperref}
+\usepackage{cleveref}[2012/02/15]
+\linespread{0.95}
+
+%-----------------------------------------------------------
+%Edit these values as you see fit
+
+\setlength{\outerbordwidth}{3pt}  % width of border outside of title bars
+\definecolor{shadecolor}{gray}{0.75}  % Outer background color of title bars (0 = black, 1 = white)
+\definecolor{shadecolorB}{gray}{0.93}  % Inner backgnd color of title bars
+
+
+%-----------------------------------------------------------
+%Margin setup
+
+\setlength{\evensidemargin}{-0.25in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\oddsidemargin}{-0.25in}
+\setlength{\paperheight}{11in}
+\setlength{\paperwidth}{8.5in}
+\setlength{\tabcolsep}{0in}
+\setlength{\textheight}{9.5in}
+\setlength{\textwidth}{7in}
+\setlength{\topmargin}{-0.5in}
+\setlength{\topskip}{0in}
+\setlength{\voffset}{0.1in}
+\setlength\LTleft{0.2in} % needed to make longtable full-width
+\setlength\LTright{0.2in}
+
+%-----------------------------------------------------------
+%Custom commands
+\newcommand{\resitem}[1]{\item #1 \vspace{-2pt}}
+\newcommand{\ressitem}[1]{\item #1 \vspace{-2.8pt}}
+\newcommand{\resitemm}[1]{[noitemsep,nolistsep]\item #1 \vspace{-2pt}}
+\newcommand{\resheading}[1]{\vspace{8pt}
+  \parbox{\textwidth}{\setlength{\FrameSep}{\fboxsep}
+    \begin{shaded}
+\setlength{\fboxsep}{0pt}\framebox[\textwidth][l]{\setlength{\fboxsep}{4pt}\fcolorbox{shadecolorB}{shadecolorB}{\textbf{\sffamily{\mbox{~}\makebox[6.762in][l]{\large #1} \vphantom{p\^{E}}}}}}
+    \end{shaded}
+  }\vspace{-5pt}
+}
+
+% the next four commands allow for the \ressubheading environment to be 1, 2, 3, or 4 subrows, depending on which command you use. This is admittedly hack-ish, and should probably be replaced by a single more flexible command (with optional arguments) in the future
+\newcommand{\ressubheading}[4]{
+\begin{tabular*}{6.5in}[t]{l@{\cftdotfill{\cftsecdotsep}\extracolsep{\fill}}r}
+		\textbf{#1} & #2 \\
+		\textit{#3} & \textit{#4} \\
+\end{tabular*}\vspace{-6pt}}
+\newcommand{\ressubheadingb}[6]{
+\begin{tabular*}{6.5in}[t]{l@{\cftdotfill{\cftsecdotsep}\extracolsep{\fill}}r}
+		\textbf{#1} & #2 \\
+		\textit{#3} & \textit{#4} \\
+		\textit{#5} & \textit{#6} \\
+\end{tabular*}\vspace{-6pt}}
+\newcommand{\ressubheadingc}[8]{
+\begin{tabular*}{6.5in}[t]{l@{\cftdotfill{\cftsecdotsep}\extracolsep{\fill}}r}
+		\textbf{#1} & #2 \\
+		\textit{#3} & \textit{#4} \\
+		\textit{#5} & \textit{#6} \\
+		\textit{#7} & \textit{#8} \\
+\end{tabular*}\vspace{-6pt}}
+\newcommand\foo[9]{%
+    \def\tempb{#2}%
+    \def\tempc{#3}%
+    \def\tempd{#4}%
+    \def\tempe{#5}%
+    \def\tempf{#6}%
+    \def\tempg{#7}%
+    \def\temph{#8}%
+    \def\tempi{#9}%
+    \foocontinued
+}
+\newcommand\foocontinued[7]{%
+    % Do whatever you want with your 9+7 arguments here.
+}
+
+\newcommand{\ressubheadingd}[1]{
+	\def\argten{#1}%
+	\ressubheadingdb
+}
+\newcommand{\ressubheadingdb}[9]{
+\begin{tabular*}{6.5in}[t]{l@{\cftdotfill{\cftsecdotsep}\extracolsep{\fill}}r}
+		\textbf{\argten} & #1 \\
+		\textit{#2} & \textit{#3} \\
+		\textit{#4} & \textit{#5} \\
+		\textit{#6} & \textit{#7} \\
+		\textit{#8} & \textit{#9} \\
+\end{tabular*}\vspace{-6pt}}
+%-----------------------------------------------------------
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\crefformat{footnote}{#2\footnotemark[#1]#3}
+\begin{document}
+
+{\large \begin{tabular*}{7in}{l@{\extracolsep{\fill}}r}
+\textbf{\LARGE Abhinav Kunapareddy}  \\
+Master's Student, Mechanical Engineering  & akunapa1@jhu.edu \\
+Johns Hopkins Univeristy  & \hyperref{http://www.abhinavkunapareddy.com/}{}{}{www.abhinavkunapareddy.com} 
+\end{tabular*}}
+\\
+
+\vspace*{-12pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\resheading{Research Interests}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\vspace*{-12pt}\begin{itemize}
+%\item
+%	{Computer Vision, Multi-Agent Systems, Machine Learning, Planning \&  Scheduling, Mobile Robots.}
+%\end{itemize}\vspace*{-16pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\resheading{Degrees and Academic Positions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace*{-12pt}\begin{itemize}
+\item
+	\ressubheading{Johns Hopkins Univeristy}{2014 -- Present}{M.S.E \textbf{Mechanical Engineering (Robotics)} }{}
+	\begin{itemize}
+		\resitem{\textbf{CGPA}: 3.75/4.0 (Upto 1\textsuperscript{st} semester)}
+		\resitem{\textbf{Key Courses}:  Robot Devices, Kinematics, Dynamics, and Control ,  Computer Vision,  Applied Optimal Control,  Introduction to Linear Systems Theory , Artificial Intelligence \footnote{Courses in Spring 2015}, Robot System Programming \footnotemark[\value{footnote}], Non-Linear Control and Planning in Robotics \footnotemark[\value{footnote}], Algorithms for Sensor based Robotics \footnotemark[\value{footnote}]}
+%\resitem{\textbf{GRE}: 330.5/346 (Quant: 167/170; Verbal: 160/170; Analytical Writing: 3.5/6)}
+	\end{itemize}	
+\item
+	\ressubheading{Indian Institute of Technology(IIT) Madras, Chennai, India}{2010 -- 2014}{B.Tech. \textbf{Mechanical Engineering} with minor in \textbf{Mathematics For Computer Science}}{}
+	\begin{itemize}
+		\resitem{\textbf{CGPA}: 8.46/10 }
+		\resitem{\textbf{Key Courses}: Mechatronics, Mechanics and Control of Robot Manipulators, Control and Instrumentation, Theory of
+Mechanisms, Theory of Computation, Design and optimization of Energy systems, Graph Theory, Mathematical Logic, Kinematics and Dynamics of
+Machinery, Linear Algebra \& Numerical Analysis, Basic Electrical Engineering, Computational Engineering}
+%\resitem{\textbf{GRE}: 330.5/346 (Quant: 167/170; Verbal: 160/170; Analytical Writing: 3.5/6)}
+	\end{itemize}
+
+\end{itemize}\vspace*{-16pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\resheading{Industrial Research}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace*{-12pt}\begin{itemize}
+\item 
+	\ressubheading{Visual Inspection System for Automated Pill Recognition}{}{Meditab Software, Inc., San Francisco}{Jan '13--Feb '13}
+	\begin{itemize}
+		\resitem{Developed a vision-based application using the open-source Computer vision package, OpenCV to identify
+individual pills on a real-time basis.}
+\resitem{
+Implemented a feed-forward artificial neural network algorithm or, more particularly, multi-layer perceptrons (MLP),
+algorithm to successfully classify 70 different kinds of pills.}
+\resitem{
+Parallelized the entire computational scheme so as to enable real-time deployment .}
+\resitem{
+Also implemented a Haar Feature-based character recognition algorithm to inspect the inscription on the pills. This
+was done cross-verify the identity of the pill from the above classification and another independent source.}
+		
+	\end{itemize}
+
+\item 
+	\ressubheading{Thermo-Mechanical Modelling of a Work Roll in hot rolling process}{}{ABB Ltd., Corporate Research Center, Bangalore}{May '13 -- July'13}
+	\begin{itemize}
+		\resitem{A computational model of the three-dimensional steady-state and transient thermal behavior of a work-roll has been
+developed. Complete 3D analysis of the thermal and mechanical behavior of the roll has been performed using
+MATLAB using as efficient implementation of Finite Element Technique}
+\resitem{
+Benchmarked my implementation with existing models to validate and quantify the efficiency improvement	}
+	\end{itemize}
+\end{itemize}
+
+\vspace*{-16pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\resheading{  Projects and Research Experience 	}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace*{-12pt}\begin{itemize}
+\item 
+	\ressubheading{Autonomous Robot: Vision based in-door autonomous navigation bot }{}{Center for Innovation, IIT Madras}{May '11 -- July '11}
+	\begin{itemize}
+		\resitem{Designed and developed autonomous vehicle which can navigate through a given path avoiding all the obstacles it encounters on its course using Image Processing based Stereo-Vision and Depth Map creation techniques.}
+		\resitem{Created a custom built stereo-camera rig to enable the Depth Map creation.}
+		\resitem{Integrated the electronic control system with real time feedback from the vision system which ensures the bot stays on the course determined}
+	\end{itemize}
+\item 
+	\ressubheading{Machine Learning for Global Optimization in design of sparse arrays }{}{Mentor: Prof. K Balasubramaniam, IIT Madras.}{Oct '13 -- Nov '13}
+	\begin{itemize}
+		\resitem{Implemented a novel global optimization framework using machine learning as an acceleration technique for design of linear sparse arrays in ultrasonics}
+		\resitem{The Implemented framework makes use of Support Vector Machines(SVM) for improving the domain of feasible choices so as to aid any generin global optimization algorithm(in this case it has been implemented for multistart and MBH algorithms) to find the Global Optimum}
+	\end{itemize}
+
+\item 
+	\ressubheading{Advanced methods for modal analysis of Complex waveguides }{}{Mentor: Prof. K Balasubramaniam, IIT Madras.}{Aug '13 -- May '14}
+	\begin{itemize}
+		\resitem{Objective: To develop Semi-Analytical Finite Element (S.A.F.E) based package for studying modal structures of
+waveguides with arbitrary cross-section.}
+		\resitem{Developing a custom code for generating dispersion curves and wave modes for any waveguide.}
+	\end{itemize}
+
+\item 
+	\ressubheading{Redundancy resolution of a manipulator--A bio-mechanical perspective}{}{Mentor: Prof. S.Bandyopadhyay, Mechanics and Control of Robot Manipulators}{May '13}
+	\begin{itemize}
+		\resitem{Analyzed various existing methods of redundancy resolution in Manipulator and designed a original method for
+redundancy resolution based on the way our human hand (the most advanced manipulator) resolves it.}
+		\resitem{The proposed method has been implemented for the case of a 3-DOF manipulator with encouraging results. This
+method has resulted in an increase of almost 20\% energy efficiency}
+	\end{itemize}
+
+\item 
+	\ressubheading{Human Gait Analysis environment}{}{Mentor: Prof. Sujatha Srinivasan, IIT Madras}{July '13--May '14}
+	\begin{itemize}
+		\resitem{Objective: To develop a gait analysis environment which can aid in rehabilitation of people with motor disabilities.}
+		\resitem{A system of network co-ordinated multiple Microsoft Kinect sensors continuously track the key joints of the
+human body and provide necessary data for kinetic analysis.}
+\resitem{The tracking of joints is done based on custom improved skeletal tracking algorithms with the help of Kalman
+Filter}
+\resitem{An array of Wii-balance boards on the ground helps provide data on the balance of the human which
+complements the above data and helps to cross-verify the details of kinetic motion of the body.}
+	\end{itemize}
+
+\end{itemize}
+
+\vspace*{-16pt}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\resheading{Technical Skills}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace*{-12pt}\begin{itemize}\itemsep0em
+		\resitem{Languages: C/C++, Java Python, MATLAB,\LaTeX, Bash, HTML, CSS, PHP, MySQL}
+		\resitem{Experience in working on ROS Framework}
+		\resitem{Experience in working on Parallel Computation--CUDA, OpenCL} 		\resitem{Software: OpenGL, OpenCV, SolidWorks, Pro/ENGINEER, Adams, Eagle, R, Visual Studio.}
+		%\resitem{Operating Systems: Proficient in Windows, Linux and OS X environments.}
+
+\end{itemize}
+\vspace*{-16pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\resheading{Scholastic Achievements and Awards}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace*{-12pt}	\vspace{-10pt}
+	\begin{center}\begin{longtable}{l@{\extracolsep{\fill}}r}
+	
+		\multicolumn{2}{l}{$\bullet$~Placed among the top 3\% in the National Standard Examinations in Physics, Chemistry and Astronomy                                                                                                               }\\
+		\multicolumn{2}{c}{~~ among over
+35000, 29000 and 8000 candidates respectively                                                                                                                              \cftdotfill{\cftdotsep}2008 -- 2009}\\
+		\multicolumn{2}{c}{$\bullet$~One among the 400 students qualified to write the Indian Mathematics Olympiad \cftdotfill{\cftdotsep} 2008 -- 2011}\\
+		\multicolumn{2}{c}{$\bullet$~Ranked 762\textsuperscript{nd} among 400,000 candidates in the IIT Joint Entrance Examination                                                         \cftdotfill{\cftdotsep}2010}\\
+		\multicolumn{2}{c}{$\bullet$~Ranked 390\textsuperscript{th} among 1,000,000 candidates in the All India Engineering Entrance Examination                                                                     \cftdotfill{\cftdotsep}2010}
+
+
+\end{longtable}
+\end{center}\vspace*{-30pt}
+
+\vspace*{-10pt}
+
+%\renewcommand{\thefootnote}{\arabic{footnote}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\resheading{ Co-Curricular Achievements}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace*{-10pt}\begin{itemize} \itemsep0em
+\ressitem
+	{\textbf{AUVSI - International RoboSub Competition
+}
+\vspace*{-6pt}\begin{itemize}\ressitem {
+\textbf{2014}: Integral member of the team that was going to represent IIT Madras at the 17th Annual International Robosub Competition organized by AUVSI at San Diego, USA . Part of the Vision team that was responsible for developing strategies to aid in AUV navigation and Obstacle detection}
+
+\end{itemize}}
+\ressitem
+	{Placed 2\textsuperscript{nd} in Modern Warfare an Image Processing Competition of Shaastra-2013\footnote{\label{first}Shaastra is the IIT Madras' student organized  ISO certified technical festival}}
+
+\ressitem
+	{Placed 2\textsuperscript{nd} in Robo Lagori a Robotic Competition of Shaastra-2013\cref{first}.} \\ % 9 reviews
+\ressitem
+{Placed 1\textsuperscript{st} in among 30 teams in Mine Sweeper an Autonomous Image processing robotics competition of Kurukshetra-2013\footnote{\label{second}Kurukshetra, is the international techno management fest conducted by Anna University,Chennai}}
+\ressitem {Placed 2\textsuperscript{nd} among 25 competitors in Cricbot an Autonomous robotics in Techfest -2012\footnote{\label{third}Techfest is Asia's Largest Science and Technology festival organized  by IIT Bombay}}
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\resheading{Technical Skills}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{itemize}
+%\item
+%	Markup Languages
+%	\begin{itemize}
+%		\resitem{CSS, \LaTeX, (X)HTML}
+%	\end{itemize}
+%
+%\item
+%	Programming Languages
+%	\begin{itemize}
+%		\resitem{ASP, C, Java, Javascript, PHP, Python, SQL, Visual Basic}
+%	\end{itemize}
+%
+%\item
+%	Specialized Software
+%	\begin{itemize}
+%		\resitem{Maple, MATLAB, S-Plus}
+%	\end{itemize}
+%\end{itemize}
+\end{document}
