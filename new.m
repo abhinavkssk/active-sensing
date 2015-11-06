@@ -1,4 +1,4 @@
-function [t,x,y_filter,u,delu,S] = new()
+function [t,x,y_filter,u,delu,S] = Ac_NSS_FullState()
 close all;
 tfinal=10;
 S.k=1;
