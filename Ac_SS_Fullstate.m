@@ -1,7 +1,7 @@
 %function [t,x,y_filter,u,delu,S] = Ac_SS_Fullstate()
 clear all;
 close all;
-tfinal=10;
+tfinal=5;
 S.k=1;
 
 S.m=1;
@@ -14,14 +14,14 @@ S.ff=0.5;%Filter Factor
 
 
 % initial state
-x0 = [0;0];
+x0 = [1;0];
 S.x0 = x0;
 
 xd= [3;0];
 S.xd=xd;
 
 
-options = odeset('RelTol',1e-4,'AbsTol',1e-4*ones(1,9));
+options = odeset('RelTol',1e-4,'AbsTol',1e-4*ones(1,14));
 options_sim = odeset('RelTol',1e-4,'AbsTol',1e-4*ones(1,4));
 
 
@@ -40,18 +40,31 @@ S.D_sys=0;
 S.kfR = 1e-4;
 S.kfQ=1e-4;
 S.kfN=0;
-sys=ss(S.A_sys,S.B_sys,S.C_sys,S.D_sys);
+
+[ze,pe,ke] = ellip(5,3,30,S.omega/10,'s');
+[be,ae] = zp2tf(ze,pe,ke);
+[A_f,B_f,C_f,~] = tf2ss(be,ae);
+
+S.A_del_filter=[S.A_sys zeros(2,5);B_f*S.C_sys A_f];
+S.B_del_filter=[S.B_sys ;0*B_f];
+S.C_del_filter=[0*S.C_sys C_f];
+sys=ss(S.A_del_filter,S.B_del_filter,S.C_del_filter,S.D_sys);
 [~,S.kfgain,~] = kalman(sys,S.kfQ,S.kfR,S.kfN);
 
+sys=ss(S.A_sys,S.B_sys,S.C_sys,S.D_sys);
+[~,S.kfgain_sim,~] = kalman(sys,S.kfQ,S.kfR,S.kfN);
 
 
-[t,x]=ode45(@(t,x) SS_overall_f( t,x, S), 0:0.001:30, [S.x0;S.x0-[1;0];zeros(5,1)], options); 
+[t,x]=ode45(@(t,x) SS_overall_f( t,x, S), 0:0.001:tfinal, [S.x0;S.x0-[1;0];zeros(5,1);zeros(5,1)], options); 
 
-[t_sim,x_sim]=ode45(@(tt,xx) sim_f( tt,xx, S), 0:0.001:30, [S.x0-[1;0];S.x0-[1;0]], options_sim); 
+
+[t_sim,x_sim]=ode45(@(tt,xx) sim_f( tt,xx, S), 0:0.001:tfinal, [S.x0-[1;0];S.x0-[1;0]], options_sim); 
 
 for i=1:size(t_sim,1)
 delu_sim(i)=-S.lqrgain*(x_sim(i,3:4)'-S.xd);
 end
+
+
 for i=1:size(t,1)
 delu(i)=-S.lqrgain*(x(i,3:4)'-S.xd);
 end
@@ -62,15 +75,12 @@ x=x(:,1:4);
 xstar=[cos(S.omega*t) -S.omega*sin(S.omega*t)];
 x1star=cos(S.omega*t);
 
-plot(t_sim,x_sim(:,3));figure;plot(t_sim,x_sim(:,1));
+plot(t,x(:,3),t,x(:,1)-x1star);
+legend('Est delx ','Actual delx')
+title('Position x1 Vs t')
+xlabel('time') % x-axis label
+ylabel('X1') % y-axis label
 figure;
-
-
-%plot(t,x(:,3),'g',t,delx_actual(:,1),'r');
-%legend('delta x1 est','delta x2 actual')
-%title('del est vs delx actual')
-%xlabel('time') % x-axis label
-%ylabel('X1_est X1_actual') % y-axis label
 
 
 for i=1:size(t,1)
@@ -100,7 +110,6 @@ legend('Simulated signal','Actual Signal')
 title('Simulates signal Vs Actual Signal')
 xlabel('time') % x-axis label
 ylabel('Output Signal after filtering') % y-axis label
-
 
 
 
