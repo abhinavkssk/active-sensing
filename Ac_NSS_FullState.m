@@ -1,4 +1,5 @@
 %function [t,x,y_filter,u,delu,S] = Ac_NSS_FullState()
+clear all;
 close all;
 tfinal=10;
 S.k=1;
@@ -47,7 +48,7 @@ delx0=S.x0-[1;0];
 xf0=zeros(5,1);
 p0=[delx0;xf0;]*[delx0;xf0]';
 p0vec=P2c(diag([1e-2 1e-12 1e-12 1e-12 1e-12 1e-12 1e-12]));
-[t,x]=ode45(@(t,x) overall_f( t,x, S), 0:0.001:5, [S.x0;delx0;xf0;xf0;p0vec], options); 
+[t,x]=ode45(@(t,x) NSS_overall_f( t,x, S), 0:0.001:5, [S.x0;delx0;xf0;xf0;p0vec], options); 
 
 [t_sim,x_sim]=ode45(@(t,x) sim_f( t,x, S), 0:0.001:30, [S.x0-[1;0];S.x0-[1;0]], options_sim); 
 

@@ -1,6 +1,6 @@
 
 
-function dx = overall_f( t,x, S)
+function dx = NSS_overall_f( t,x, S)
 t
 S.xstar=[cos(S.omega*t) -S.omega*sin(S.omega*t)];
 S.ustar=-S.m*S.omega^2*cos(S.omega*t)-S.b*S.omega*sin(S.omega*t);
