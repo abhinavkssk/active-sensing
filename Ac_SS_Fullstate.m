@@ -100,8 +100,8 @@ H1=tf(be,ae);
 y_filter=lsim(H1,y_mod_nl,t);
 
 %H=-tf([3*S.omega],[2*S.m 2*S.b 0]);
-y_sim_temp=lsim(sys,delu,t,S.x0-[1;0]);
-y_sim_temp=lsim(sys,delu_sim,t,S.x0-[1;0]);
+%y_sim_temp=lsim(sys,delu,t,S.x0-[1;0]);
+y_sim_temp=lsim(sys,delu_sim,t_sim,S.x0-[1;0]);
 
 y_sim=lsim(H1,y_sim_temp,t);
 %figure;

@@ -1,7 +1,7 @@
 %function [t,x,y_filter,u,delu,S] = Ac_NSS_FullState()
 clear all;
 close all;
-tfinal=10;
+tfinal=5;
 S.k=1;
 
 S.m=1;
@@ -48,9 +48,9 @@ delx0=S.x0-[1;0];
 xf0=zeros(5,1);
 p0=[delx0;xf0;]*[delx0;xf0]';
 p0vec=P2c(diag([1e-2 1e-12 1e-12 1e-12 1e-12 1e-12 1e-12]));
-[t,x]=ode45(@(t,x) NSS_overall_f( t,x, S), 0:0.001:5, [S.x0;delx0;xf0;xf0;p0vec], options); 
+[t,x]=ode45(@(t,x) NSS_overall_f( t,x, S), 0:0.001:tfinal, [S.x0;delx0;xf0;xf0;p0vec], options); 
 
-[t_sim,x_sim]=ode45(@(t,x) sim_f( t,x, S), 0:0.001:30, [S.x0-[1;0];S.x0-[1;0]], options_sim); 
+[t_sim,x_sim]=ode45(@(t,x) sim_f( t,x, S), 0:0.001:tfinal, [S.x0-[1;0];S.x0-[1;0]], options_sim); 
 
 for i=1:size(t_sim,1)
 delu_sim(i)=-S.lqrgain*(x_sim(i,3:4)'-S.xd);
@@ -98,6 +98,7 @@ y_filter=lsim(H1,y_mod_nl,t);
 
 %H=-tf([3*S.omega],[2*S.m 2*S.b 0]);
 y_sim_temp=lsim(sys,delu,t,S.x0-[1;0]);
+y_sim_temp=lsim(sys,delu_sim,t,S.x0-[1;0]);
 
 y_sim=lsim(H1,y_sim_temp,t);
 %figure;
