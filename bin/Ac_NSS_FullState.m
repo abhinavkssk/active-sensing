@@ -1,6 +1,7 @@
 %function [t,x,y_filter,u,delu,S] = Ac_NSS_FullState()
 clear all;
 close all;
+addpath('../include','-end')
 tfinal=5;
 S.k=1;
 
