@@ -1,0 +1,75 @@
+\input{Header.tex}
+\title{EN.530.603 Applied Optimal Control \\HW \#5 Solutions}
+\graphicspath{{./figures/}}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item Code for question 1b
+\lstinputlisting[language=Matlab]{int_test.m}
+\begin{figure}[h!]
+  \centering
+  \def\svgwidth{\columnwidth}
+  \input{figures/pic1.pdf_tex}
+   \caption{The result from kalman filter tracking of angle}
+   \label{fig1}
+\end{figure}
+\newpage
+\begin{figure}[h!]
+  \centering
+  \def\svgwidth{\columnwidth}
+  \input{figures/pic2.pdf_tex}
+   \caption{Norm of Covariance matrix (P) to show convergence}
+   \label{fig2}
+\end{figure}
+\newpage
+\begin{figure}[h!]
+  \centering
+  \def\svgwidth{\columnwidth}
+  \input{figures/pic3.pdf_tex}
+   \caption{Error in angle and bias}
+   \label{fig3}
+\end{figure}
+
+
+
+\item Code for Question 3a   
+\lstinputlisting[language=Matlab]{uni_test1.m}
+\begin{figure}[h!]
+  \centering
+  \def\svgwidth{\columnwidth}
+  \input{figures/pic5.pdf_tex}
+   \caption{Estimated trajectory and true trajectory for EKF. (b) Errors of all the four states oscillate around 0}
+   \label{fig4}
+\end{figure}
+\begin{figure}[h!]
+  \centering
+  \def\svgwidth{\columnwidth}
+  \input{figures/pic6.pdf_tex}
+   \caption{The radius of the wheel converges to it's true value}
+   \label{fig6}
+\end{figure}
+
+\newpage
+\item  Code for 3b
+\lstinputlisting[language=Matlab]{uni_test2.m}
+\textbf{Remarks:} From the results in Fig[\ref{fig7}, \ref{fig8}] the sensor is not able to reconstruct the whole state. The radius of the wheel goes converges to around 0.8 and the errors in position x and y look like sine waves without any drop in amplitude. This can be easily understood based on the nature of the sensor data. Since we are only getting angle information and no distance information, in the Fig[\ref{fig7}], the estimated value converges to a circle of a smaller radius. Since both have same phase the angle with respect to the beacon will be the same but the distance from the beacon will be different. Hence it is not possible to reconstruct the full state information from only angle measurement.
+
+\begin{figure}[h!]
+  \centering
+  \def\svgwidth{\columnwidth}
+  \input{figures/pic7.pdf_tex}
+   \caption{The result of tracking for EKF with only angle measurements}
+   \label{fig7}
+\end{figure}
+\begin{figure}[h!]
+  \centering
+  \def\svgwidth{\columnwidth}
+  \input{figures/pic8.pdf_tex}
+   \caption{The radius does not converge to the true value and has an offset}
+   \label{fig8}
+\end{figure}
+\end{enumerate} 
+
+
+\end{document}
