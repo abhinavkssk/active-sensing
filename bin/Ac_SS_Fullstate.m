@@ -114,7 +114,7 @@ ylabel('Output Signal after filtering') % y-axis label
 
 
 
-%{
+
 
 %%
 
@@ -165,7 +165,7 @@ line(limits([1 2 2 1 1]),limits([3 3 4 4 3]),...
 
         x_range=x(:,1);
     y_range=1.5*x_range.^2+5*x_range;
-        C1 = mat2gray(y_range);
+        C1 = mat2gray(x_range);
         
     % image(X,Y,C) where C is the RGB color you specify. 
     image(xdata,[0 1],repmat(C1, [1 1 3]),'Parent',stripe_axes);
@@ -179,7 +179,13 @@ line(limits([1 2 2 1 1]),limits([3 3 4 4 3]),...
 %figure;
 %plot(t,C,t,C1)
 figure;
-plot(t,x_range);figure;plot(t,y_range)
+plot(t,x_range);
+legend('t','position')
+title('Position Vs time')
+xlabel('time') % x-axis label
+ylabel('Position x1') % y-axis label
+
+%figure;plot(t,y_range)
 
 
 %}
