@@ -1,0 +1,109 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+\usepackage{fullpage}
+%\usepackage{times}
+
+\usepackage{fancybox}
+\usepackage{epsfig}
+\usepackage{graphicx}
+%\usepackage{amsmath,amssymb, amsfonts,amsthm}
+
+\usepackage{hyperref, xmpmulti, textpos}
+
+% You can add more of these if it is helpful.
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\renewcommand{\qed}{\hfill $\framebox(6,6){}$}
+
+% Use the proof environment when the proof immediately follows the corresponding
+% theorem or lemma.
+\renewenvironment{proof}{\par{\noindent \bf Proof:}}{\qed \par}
+
+% Use the proofof environment when the proof appears later.
+\newenvironment{proofof}[1]{\par{\noindent \bf Proof of #1:}}{\qed\par}
+
+% Use the proofsketch environment for less formal proof ideas.
+\newenvironment{proofsketch}{\par{\noindent \bf Proof Sketch:}}{\qed\par}
+
+% CHANGE THESE DEFINITIONS AS APPROPRIATE:
+%\def \scribe {Jennifer Wortman Vaughan} % Change this to your names
+\def \lecturer {Marin Kobilarov} % Change this only if there is a guest lecturer
+\def \lecturedate {\today}  % Change this to the date of class
+\def \lecturenumber {1} % Change this to the number of the class 
+
+
+\begin{document}
+
+% Don't change this part -- All changes to the header should be made above
+\noindent
+\begin{center}
+  \framebox[\textwidth]{
+    \vbox{\vspace{4mm}
+      \hbox to 0.95\textwidth { {\bf \Large \hfill EN530.603 Applied Optimal Control Project \hfill} }
+      \vspace{2mm}      
+      \hbox to 0.95\textwidth { {\bf \Large \hfill Project  \hfill} }
+      \vspace{2mm}      
+      \hbox to 0.95\textwidth { {\Large \hfill \lecturedate  \hfill} }
+      \vspace{6mm}
+      \hbox to 0.95\textwidth { {\hfill Prof: \lecturer \hfill} }
+%      \hbox to 0.95\textwidth { {\hfill Scribe: \scribe\hfill} }
+      \vspace{4mm}}
+  }
+\end{center}
+
+%\begin{figure}[h]
+%  \begin{center}      
+%    \includegraphics[width=2.5in]{figures/omnihover}
+%    \caption{Omnidirectional hovercraft.}\label{fig:hover}
+%  \end{center}
+%\end{figure}
+
+
+%
+
+\section{Overview}
+The goal of the course project is to apply the Numerical Optimization and Estimation algorithms learned during the class on a practical robotic system. Various implementations of these 
+robotic systems will be provided to you. This is an individual project and each student submit their own individual work. Every student should present a 
+report not exceeding [FILL] pages and present their results in a 5 minute presentation to the class. The report is due[FILL] and presentation will be [FILL]
+%In addition, you are free to use your own robotic system implementation. Interested students can also use C++ implementations of these systems. 
+%
+%Students using their own system implementation should verify with the professor before proceeding. 
+
+\section{Suggested Projects}
+\begin{enumerate}
+\item \textbf{Optimal Control}: 
+\begin{enumerate}
+  \item Robotic manipulator
+  \item Car model
+  \item Quadcopter model
+  \item Mobile manipulator (a manipulator mounted on a mobile robot)
+  \item Unmanned surface vehicle (USV) 
+  \item Satellite with underactuated Degrees of Freedom
+\end{enumerate}
+\item \textbf{Estimation}:
+\begin{enumerate}
+  \item  Object Shape based on noisy range only measurements.
+  \item Position of car based on Odometry information and GPS data.
+\end{enumerate}
+\end{enumerate}
+
+\section{Deliverables}
+% \begin{enumerate}
+% \item Final Report: a report (3 page max) of your current progress
+% \item Presentation: 5 minute presentation summarizing your progress
+% \end{enumerate}
+% 
+
+\centering
+\begin{tabular}{|c|c|c|}\hline
+  Dates & Presentations & Hand-in \\\hline\hline
+3/31 & Discuss chosen project with instructor & \\ \hline
+5/10 & Final Presentations (15 min. per team) & Project report (up to 6 pages)\\\hline
+\end{tabular}
+
+
+  
+\end{document}

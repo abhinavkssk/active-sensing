@@ -1,8 +1,0 @@
-\input{Header.tex}
-
-\begin{document}
-
-\section{Suppoting functions}
-  \lstinputlisting[language=Matlab]{hw2.m}
-
-\end{document}

@@ -1,0 +1,453 @@
+\input{Header.tex}
+\title{EN.530.603 Applied Optimal Control \\HW \#1 Solutions}
+\graphicspath{{./figures/}}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+
+  %%%%%%%%%%%%%%%Question 1%%%%%%%%%%%%%%%%%%%%%%%%
+\item To find stationary points and determine whether they are maxima, minima or
+saddle points:
+  For stationary points, the gradient has to be zero.
+  \begin{enumerate}
+   \item  %%%%%%Part A%%%%%%%%%%%
+   \begin{align*}
+      L(x) &= (1-x_1)^2 + 200(x_2 - x_1^2)^2 \\[6pt]
+      \nabla L(x) = \begin{bmatrix}
+			  \frac{\partial L}{\partial x_1} \\[6pt]
+			  \frac{\partial L}{\partial x_2} \\
+			  \end{bmatrix}  &= 
+			  \begin{bmatrix}
+			    2(1-x_1)(-1) + 400(x_2 - x_1^2)(-2x_1) \\
+			    2\times 200 (x_2 -x_1^2)\\
+			    \end{bmatrix}  = \mathbf{0_{2\times1}}\\[6pt]
+	\Rightarrow x_2 = x_1^2 \quad &	\& \quad -1+x_1 = 0\\
+	\Rightarrow x_1 = 1 \quad & \& \quad x_2 = x_1^2 = 1 \\
+   \end{align*}
+   Thus the stationary point is (1,1). Now to characterize the stationary point
+we look at the Hessian of the function:
+   \begin{align*}
+    \nabla^2 L(x) &= \begin{bmatrix}
+                     2\left( 1 - 400 x_2 + 1200 x_1^2\right) & 2 (-400 x_1) \\
+                     400(-2 x_1) & 400 \\
+                    \end{bmatrix}\\[6pt]
+     \nabla^2 L(x) |_{(1,1)} &= H =  \begin{bmatrix}
+                                1602 & -800 \\
+                                -800 & 400 \\
+                               \end{bmatrix}\\
+      eig(H) &= \{0.4, 2001.6\}\\
+   \end{align*}
+   Thus the Hessian is positive definite which implies the stationary point
+(1,1) is a \textbf{strict local minimum}
+   
+   \item %%%%%%Part B%%%%%%%%%%%
+   \begin{align*}
+    L(u) &= (u-1)(u+2)(u-3) \\
+    \nabla L(u) = \frac{\partial L}{\partial u} &= (u-1)(u+2) + (u-1)(u-3) +
+(u+2)(u-3) = 3 u^2 -4u -5 = 0\\
+    \Rightarrow u^* &= \{2.1196, -0.7863\}\\
+  \end{align*}
+  Now to characterize the stationary points we look at the Hessian:
+  \begin{align*}
+   \nabla^2 L(u) = \frac{\partial^2 L}{\partial^2 u} &= 6u -4\\
+   \nabla^2 L(u) |_{u = 3.36} &= = 8.718 \\
+   \nabla^2 L(u) |_{u = -0.694} &= -8.718 \\
+  \end{align*}
+  Clearly, point u = 2.1194 is \textbf{strict local minima} and point u = -0.7863
+is \textbf{strict local maximum}
+  
+  \item %%%%%%Part C%%%%%%%%%%%
+  \begin{align*}
+    L(u) &= (u_1^2 + 3 u_1 - 4) (u_2 ^2 - u_2 + 3) \\
+    \nabla L(u) = \begin{bmatrix}
+			  \frac{\partial L}{\partial u_1} \\[6pt]
+			  \frac{\partial L}{\partial u_2} \\
+			  \end{bmatrix}  &= 
+			  \begin{bmatrix}
+			    (2 u_1 + 3) (u_2^2 -u_2 + 3) \\
+			    (u_1^2 + 3u_1 -4) (2 u_2 -1) \\
+			    \end{bmatrix}  = \mathbf{0_{2\times1}}\\[6pt]
+	\forall u_2 &\in \mathbb{R} \quad u_2^2 - u_2 + 3 > 0 \\	 
+	\Rightarrow u_1 &= -3/2 \\
+	\Rightarrow u^* &= \begin{bmatrix}
+	                 -3/2 \\
+	                 1/2 \\
+	                \end{bmatrix}\\
+  \end{align*}
+  Now that we found the stationary point let us characterize it by looking at
+the Hessian of the above objective function:
+  \begin{align*}
+   \nabla^2 L(u) &= \begin{bmatrix}
+                    2 (u_2^2 -u_2 + 3) & (2u_1+3)(2u_2-1) \\
+                    (2u_1+3)(2u_2 - 1) & 2(u_1^2 +3 u_1 - 4) \\
+                   \end{bmatrix} \\
+    \nabla^2 L(u) |_{u = (-1.5,0.5)} &= \begin{bmatrix}
+                                         5.5 & 0 \\
+                                         0 & -12.5\\
+                                        \end{bmatrix}\\
+     \Rightarrow eig(\nabla^2 L(u)) &= \{ 5.5,-12.5\} \\
+  \end{align*}
+  Since the eigen values are both positive and negative at the stationary point
+u = (-3/2, 1/2), the point is a \textbf{saddle point}. 
+  \end{enumerate}
+  
+ \newpage 
+  %%%%%%%%%%%%%%%Question 2%%%%%%%%%%%%%%%%%%%%%%%%
+  \item To find the stationary points and determine the maxima, minima or saddle
+points:
+  \begin{enumerate}
+   \item %%%%%%Part A%%%%%%%
+   Define $H$  using lagrangian multipliers as $H := L(x) +
+\lambda f(x)$ where $\lambda \in \mathbb{R}$ is a scalar. To find the stationary
+points, we have to equate the gradient to zero:
+    %\Rightarrow \lambda &= -x_1^* \quad (x_1^* \text{ is the stationary
+%point})\\
+   \begin{align*}
+    H (x) &= \frac{1}{2} (x_1^2 + x_2^2 + x_3^2) + \lambda (x_1 + x_2 +
+x_3) \\
+    \frac{\partial H}{\partial x_1} &= x_1 + \lambda  = 0  \quad
+\text{(at stationary point)}\\
+    \frac{\partial H}{\partial x_2} &= x_2 + \lambda  = 0  \\
+    \frac{\partial H}{\partial x_3} &= x_3 + \lambda  = 0  \\
+    \text{From constraint  f(x) }\quad  &x_1 + x_2 + x_3 = 0 \\
+    \Rightarrow x_2^* = x_3^* &= x_1^* = -\lambda = 0\\
+   \end{align*}
+   Thus the stationary point is (0,0,0). To characterize the stationary point we
+look at the Hessian of the $H$. Since $\lambda = 0$, $H = L$.
+Thus 
+   \begin{align*}
+    \nabla^2 H = \begin{bmatrix}
+		  1 & 0 & 0 \\
+		  0 & 1 & 0 \\
+		  0 & 0 & 1 \\
+		  \end{bmatrix}
+    \Rightarrow eig(H) = \{1,1,1\}                                     
+   \end{align*}
+   Since the eigen values are all positive, the Hessian is positive definite and
+hence the stationary point (0,0,0) is a \textbf{strict local minimum}
+   
+   \item %%%%%%Part B%%%%%%%
+    Similar to above problem, define the augmented cost function and let's equate the
+gradient to zero:
+    \begin{align*}
+     &H(u) = L(u) + \lambda f(u) = (u_1^2 + 3 u_1 - 4) (u_2^2 - u_2 + 3)
++ \lambda (u_1 - 2 u_2) \\
+     &\frac{\partial H}{\partial u_1} = (2 u_1 + 3)(u_2^2 - u_2 + 3) +
+\lambda = 0 \quad \text{(at stationary point)} \\
+     &\frac{\partial H}{\partial u_2} = (u_1^2 + 3 u_1 - 4)(2 u_2 - 1) -
+2 \lambda = 0\\
+     &\frac{\partial H}{\partial \lambda} = u_1 - 2u_2 = 0 \\
+     &\Rightarrow u_1 = 2u_2 \quad \text{and}\\
+     &\Rightarrow (u_1^2 + 3 u_1 - 4)(2 u_2 - 1) + 2 (2 u_1 + 3)(u_2^2 - u_2 +
+3) = 0\\
+     &\Rightarrow (2 u_2^2 + 3 u_2 -2)(2 u_2 -1) +  (4 u_2 + 3)(u_2^2 - u_2 + 3)
+= 0\\
+     &\Rightarrow 8 u_2^3 + 3 u_2^2 +2 u_2 + 11 = 0
+    \end{align*}
+    The above cubic equation yields only one real root i.e $u_2 = -1.1683$ i.e $u
+= (-2.3367,-1.1683)$. To characterize this stationary point we look at the second order variation
+of $H$ only along the constraint directions:
+    \begin{align*}
+     du^T \nabla^2 H du &= \begin{bmatrix}
+			      du_1\\
+			      du_2
+			    \end{bmatrix}^T
+			    \begin{bmatrix}
+			    2(u_2^2 - u_2 + 3) & (2u_1 + 3) (2 u_2 - 1) \\
+			    (2 u_1 + 3) (2 u_2 -1) & 2(u_1^2 + 3 u_1 - 4) \\
+                         \end{bmatrix}
+                         \begin{bmatrix}
+			      du_1\\
+			      du_2
+			    \end{bmatrix}\\
+	df &= f_{u_1} du_1 + f_{u_2} du_2 = du_1 -2du_2 = 0 \\
+	\Rightarrow du^T \nabla^2 H du |_{u=(-2.3367, -1.1683)} &= du_2 \begin{bmatrix}
+	                                        2 & 1
+	                                       \end{bmatrix}
+	                                       \begin{bmatrix}
+	                                       11.0667 & 5.5834\\
+	                                       5.5834 & -11.0999\\
+	                                       \end{bmatrix}
+	                                       \begin{bmatrix}
+	                                        2\\ 1
+	                                       \end{bmatrix} du_2 \\
+	                    &= 55.5 du_2^2
+    \end{align*}
+  Since the second order variation is always greater than zero for any non zero $du_2$, the stationary point (-2.3367, -1.1683) is a \textbf{strict local minimum}
+  \end{enumerate}
+  
+  %%%%%%%%%%%%%%%Question 3%%%%%%%%%%%%%%%%%%%%%%%%
+  \item 
+  \begin{enumerate}
+   \item To optimize the quadratic cost function with constraints given as:
+  \begin{align*}
+    L(x,u) &= \frac{1}{2} x^T Q x + \frac{1}{2} u^T R u \\
+    f(x,u) &= Ax + Bu + c = 0 \quad x \in \mathbb{R}^n, c \in \mathbb{R}^m\\
+  \end{align*}
+  Assume Q, R are symmetric. If not the skew symmetric part of the matrix does not alter the cost in any way and the matrices can be relabeled accordingly. Using the Lagrangian multipliers method the necessary conditions are:
+  \begin{align*}
+   L^\prime(x,u) &= \frac{1}{2} x^T  Q x + \frac{1}{2} u^T  R u + \lambda^T
+(Ax+Bu+c)\\
+   \frac{\partial L^\prime}{\partial x} &= x^T  Q  + \lambda^T (A) =
+\mathbf{0_{1\times n}}\\
+   \frac{\partial L^\prime}{\partial u} &= u^T  R  + \lambda^T (B) =
+\mathbf{0_{1\times m}}\\
+   \frac{\partial L^\prime}{\partial \lambda} &= Ax + Bu +c = 0 \\
+  \end{align*}
+  The sufficient conditions are:
+  \begin{align*}
+   &\begin{bmatrix}
+    dx \\
+    du
+   \end{bmatrix}^T 
+   \begin{bmatrix}
+    Q & 0\\
+    0 & R
+   \end{bmatrix}
+    \begin{bmatrix}
+    dx \\
+    du
+   \end{bmatrix} > 0 \quad \text{s.t}\\
+   &df = A dx + B du = 0\\
+  \end{align*}
+  Assuming A is full rank, the optimal solution for x, u are found as follows:
+  \begin{align*}
+   &u =  - R^{-1} B^T \lambda\\
+   &A x =  (B R^{-1}B^T)\lambda -c \\
+   &\Rightarrow x = A^{-1} (B R^{-1} B^T) \lambda -A^{-1} c\\
+   &Qx + A^T \lambda = (Q A^{-1} (B R^{-1} B^T) + A^T)\lambda  - Q A^{-1}c = 0\\
+   &\Rightarrow A^{-1}((AQA^{-1}) (B R^{-1} B^T) + A A^T) \lambda = Q A^{-1}c
+  \end{align*}
+  It can be shown that  the matrix $((AQA^{-1}) (B R^{-1} B^T) + A A^T)$ is positive definite under assumption that A is full rank and Q, R are positive semidefinite. Hence it is invertible and we can find $\lambda$ as:
+  \begin{align*}
+   &\lambda = ((AQA^{-1}) (B R^{-1} B^T) + A A^T)^{-1} AQA^{-1}c\\
+   &\text{OR}\\
+   &\lambda = (Q A^{-1} (B R^{-1} B^T) + A^T)^{-1} QA^{-1}c\\
+   &\Rightarrow u = -R^{-1} B^T (Q A^{-1} (BR^{-1} B^T) + A^T)^{-1} QA^{-1}c\\
+   &\Rightarrow x = A^{-1}(B R^{-1} B^T ) (Q A^{-1} (BR^{-1} B^T) + A^T)^{-1} QA^{-1}c
+  \end{align*}
+  
+  Second order sufficient conditions can be simplified as:
+  \begin{align*}
+    &df = A dx + B du = 0\\ 
+    &\Rightarrow dx = -A^{-1} B du \\
+    &\Rightarrow du^T \left((A^{-1}B)^T Q (A^{-1}B) + R\right) du > 0
+  \end{align*}
+  Since R is positive definite, Q is positive semidefinite, the combined matrix \\$((A^{-1}B)^T Q (A^{-1}B) + R)$ is positive definite. Hence the stationary point found is a strict local minimum.
+  
+  \item Given quadratic Cost function and linear constraints:
+    \begin{align*}
+     &L(y) = \frac{1}{2} y^T M y \\
+     &\text{s.t}\\
+     &f(y) = Ay + c = 0 
+    \end{align*}
+%    Given $A \in \mathbb{R}^{m\times n}$ is full rank, we relabel indices of y to rewrite the constraint as:
+%     \begin{equation*}
+%     \begin{bmatrix} 
+%       A_1 & A_2
+%     \end{bmatrix} 
+%     \begin{bmatrix}
+%      y_1\\
+%      y_2
+%     \end{bmatrix} + c = 0
+%     \end{equation*}
+    %where $A_1 \in \mathbb{R}^{m\times m}$ is invertible. 
+%     \begin{equation*}
+%      H = \frac{1}{2} \begin{bmatrix}
+%                       y_1 \\ y_2
+%                      \end{bmatrix}^T
+%                      \begin{bmatrix}
+%                       M_1 & M_2\\
+%                       M_3 & M_4
+%                      \end{bmatrix}
+%                      \begin{bmatrix}
+%                       y_1 \\ y_2
+%                      \end{bmatrix} + \lambda^T 
+%                      \begin{bmatrix}
+%                       A_1 & A_2
+%                      \end{bmatrix}
+%                      \begin{bmatrix}
+%                       y_1\\ y_2
+%                      \end{bmatrix} + \lambda^T c 
+%     \end{equation*}
+Using the Lagrangian approach, the new cost function is written as:
+    \begin{equation*}
+     H = \frac{1}{2} y^T M y + \lambda^T (Ay+c)
+    \end{equation*}
+   The first order necessary conditions require:
+   \begin{align*}
+    H_{y} &= y^T M + \lambda^T A = 0\\
+    \Rightarrow y &= M^{-1} A^T \lambda\\
+    H_{\lambda} = A y + c &= (A M^{-1} A^T) \lambda + c = 0\\
+    \Rightarrow \lambda &= -(A M^{-1} A^T)^{-1} c\\
+    \Rightarrow y &= -M^{-1} A^T (A M^{-1} A^T)^{-1} c
+   \end{align*}
+   It should be noted that given A is full rank and M is positive definite, implies that the matrix $A M^{-1} A^T$ is also positive definite and hence invertible. We next look at the second order conditions as follows:
+   \begin{align*}
+   &dy^T \nabla^2 H dy = dy^T M dy > 0\\
+   & Ady + c = 0
+   \end{align*}
+   Since M is positive definite, the fist condition is satisfied irrespective of the constraint. Thus the stationary point found is already a strict local minimum. Now to say it is a global minimum, first we note that there are no other stationary points for the cost function except the one we found. Second the function is radially unbounded i.e 
+   \begin{equation*}
+    \displaystyle\lim_{\|y\| \to \infty} \frac{1}{2} y^T M y \to \infty
+   \end{equation*}
+   Hence there are no minimum possible at the boundaries either. Hence the only minimum and the global minimum is the stationary point found.
+
+\end{enumerate}
+\item 
+   Matlab code for both the parts are given as follows:
+  \lstinputlisting[language=Matlab]{Hw1.m}
+%   \begin{enumerate}
+%     \item  The above solution converges to $\{x,u\} = \{1,1\}$ for very small
+% step sizes. If the step size is larger, the solution does not converge and even
+% diverges.
+%   \item The analytical solution for minimization following lagrangian method is
+% as follows:
+%   \begin{align*}
+%    L^\prime(x,u) &= x^2 + 10 u^2 + \lambda (x-2u+3) \\
+%    \frac{\partial L^\prime}{\partial x} &= 2x + \lambda = 0\\
+%    \frac{\partial L^\prime}{\partial u} &= 20u + 2\lambda = 0\\
+%    \frac{\partial L^\prime}{\partial \lambda} &= x-2u+3 = 0\\
+%    \Rightarrow \frac{-\lambda}{2} -&2\frac{\lambda}{10} + 3 = 0\quad \Rightarrow
+% \{\lambda,x,u\} = \{\frac{30}{7}, \frac{-15}{7}, \frac{-3}{7}\}\\
+%   \end{align*}
+%   The above solutions match with fmincon implementation from matlab.
+%   \end{enumerate}
+% 
+%   \begin{figure}[h!]
+%       \begin{minipage}{0.5\linewidth}
+%         \centering
+% 	\includegraphics[width=4in, height = 3in]{pic1.pdf}
+% 	\caption{(a) plot of L(x) and gradient descent}
+%       \end{minipage}
+%       \hspace{0.2in}
+%       \begin{minipage}{0.5\linewidth}
+%       \centering
+% 	\includegraphics[width=4in, height=3in] {pic2.pdf}
+% 	\caption{(a) contours and convergence of gradient descent to (1,1)}
+%       \end{minipage}
+%   \end{figure}
+%   \begin{figure}[h!]
+%       \begin{minipage}{0.5\linewidth}
+%         \centering
+% 	\includegraphics[width=4in, height = 3in] {pic3.pdf}
+% 	\caption{(b) contour plot of constrained minimization for $L = x^2 + 20
+% u^2$}
+%       \end{minipage}
+%       \hspace{0.2in}
+%       \begin{minipage}{0.5\linewidth}
+%       \centering
+% 	\includegraphics[width=4in, height = 3in] {pic5.pdf}
+% 	\caption{(a) divergence for step size 0.005}
+%       \end{minipage}
+%   \end{figure}
+   %%%%%%%%%%%%%%%Question 5%%%%%%%%%%%%%%%%%%%%%%%%
+  \item Minimization problem stated as:
+  \begin{align*}
+   f^k(d) &= f(x^k) + \nabla f(x^k)^T d + \frac{1}{2} d^T \nabla^2 f(x^k) d \quad
+ d \in \mathbb{R}^n\\
+   s.t \quad \|d\| &\leq \gamma ^{k}\\
+  \end{align*}
+  If the constraint is active it is treated as an equality and following Lagrange
+ multipliers method:
+  \begin{align*}
+   f(d) &= \|d\| -\gamma^k = \sqrt{d^T d} - \gamma^k \\
+   L^\prime(d) &= f(x^k) + \nabla f(x^k)^T d + \frac{1}{2} d^T \nabla^2 f(x^k) d
+ + \lambda(\sqrt{d^T d} - \gamma^k) \quad \lambda \geq 0\\
+   \frac{\partial L^\prime}{\partial d} &= \nabla f(x^k)^T + d^T \nabla^2 f(x^k)
+ + \lambda(\frac{1}{2 \sqrt{d^T d}}d^T) = 0\\
+   \frac{\partial L^\prime}{\partial \lambda} &= \sqrt{d^T d} - \gamma^k = 0 \\ 
+   \Rightarrow -\nabla f(x^k)^T&= d^T \left( \nabla^2 f(x^k) + \frac{\lambda}{
+ 2\gamma^k }I\right) \\
+   \Rightarrow \left( \nabla^2 f(x^k) + \delta^k I\right)d &= -\nabla f(x^k)\quad
+ \text{Since hessian and Identity are both symmetric}\\
+  \end{align*}
+  Thus we have shown that the constrained optimization problem is equivalent to
+ solving the above form of matrix equations for $\delta^k$ and d. The value of $\delta^k$ is given as:
+\begin{align*}
+	&\delta^k = 0 \quad \mbox{if } \| {\nabla^2 f(x^k)}^{-1} \nabla f(x^k) \| \leq \gamma^k \quad \mbox{else}\\
+	&\delta^k \mbox{ is given by } \| \left(\nabla^2 f(x^k) + \delta^k I\right)^{-1} \nabla f(x^k) \| = \|d\| = \gamma^k
+\end{align*}
+A reasonable choice for $\delta^k$ is found by assuming $\delta^k =max\{-eig(\nabla^2 f(x^k)),0\}+ \epsilon $ (eig(M) refers to list of eigen values of the M	) and finding $\epsilon$ to ensure $\|d\| \leq \gamma^k$. With the form of $\delta$ chosen, the matrix $H^\prime = \left({\nabla^2 f(x^k)} + \delta^k I \right)^{-1}$ is symmetric positive definite with maximum eigen value being $1/\epsilon$. Then the  matrix ${H^\prime}^T H^\prime$ is also positive definite with maximum eigen value being $1/\epsilon^2$.
+\begin{align*}
+	&d^T d = \nabla f(x^k)^T {H^\prime}^T H^\prime \nabla f(x^k) \leq \frac{1}{\epsilon^2} \| \nabla f(x^k) \|^2\\
+	&\mbox{Choose $\epsilon$ as }\\
+	&\epsilon = \frac{\| \nabla f(x^k) \|}{\gamma^k}\quad \Rightarrow d^Td \leq {\gamma^k}^2\\
+	&\delta^k = max\{-eig(\nabla^2 f(x^k)),0\}+ \frac{\| \nabla f(x^k) \|}{\gamma^k}
+\end{align*}
+%We need to choose the right $\delta^k$ so that the value of $\|d\| \leq \gamma^{k}$. A reasonable choice of $\delta^k$ is
+ %$max\{-eig(\nabla^2 f(x^k)),0\}+ \epsilon \quad \epsilon \geq 0 $. Since the eigen values of the incremented
+ %Hessian is the sum of original eigenvalues and $\delta^k$. Such a choice will
+ %ensure all the eigen values of $\left( \nabla^2 f(x^k) + \delta^k I\right)$ at least $\epsilon$. This satisfies the second order sufficiency condition for the Hessian.Also the value of 
+ %$\epsilon$ should be found such that the value $\sqrt{d^Td} \leq \gamma^k$
+ %\begin{align*}
+ %\text{if } &\delta^k = max\{-eig(\nabla^2 f(x^k)),0\}+ \epsilon \quad \epsilon \geq 0 \\
+   %&\Rightarrow d^T\left( \nabla^2 f(x^k) + \delta^k I\right)d = -d^T\nabla f(x^k) \geq d^T \mathit{\epsilon I}d = \epsilon {\gamma^k}^2\quad\\
+   %&\Rightarrow 0 \leq \epsilon \leq \frac{-d^T \nabla f(x^k)}{{\gamma^k}^2}
+ %\end{align*}
+ %
+%%%%%%%%%%%%%%%%Problem 5%%%%%%%%%%%%%%
+% \item Paper: \textbf{Arthur Bryson Optimal Control 1950-1985}
+% 
+% This paper describes the efforts of various authors in a 35 year period in the field of optimal control.
+% 
+% \textbf{History of Calculus of Variations}
+% 
+% \emph{Roots from calculus of variations}\\
+% Optimal control can be regarded as an extension of calculus of variations. The paper describes some of the very early optimization problems posed by Galileo and Bernoulli(1600's) such as brachistochrone problem (shape of wire to minimize bead travel time); the drag nose shapes of projectile and other such problems. These were solved using Calculus of variations invented by Sir Newton and coinvented by Lebiniz. 
+% Based on these works Euler and Lagrange(1700's) have proposed the first order necessary conditions for a stationary solution namely Euler-Lagrange equations. 
+% The first-order conditions for generalizations from calculus of variations have been discovered in 1750-1850 by the efforts of Legendre, Jacobi and Hamilton culminating in the Hamilton-Jacobi equations which formed basis for dynamic programming later on.
+% The formal rigorous mathematical structure has finally been in place by efforts of Weirstras and many others. Also at the same time many people were able to recognize the use of Calculus of Variations for engineering design.
+% 
+% \emph{Roots from Classical control theory}\\
+% Optimal control in earlier days seen as a tool for adjusting the control system's performance to satisfactory and improve performance. This involved tuning the gains of the control systems and several crietia such as Nquist criterions etc have been proposed in the frequency domain.
+% In 1960 Kalman proposed a method for measuring the performance of the system and controlling the feedback to the system known as LQR (Linear Quadratic Regulator). 
+% 
+% \emph{Roots in Random Processes}\\
+% Started with Einstein and extended by Wiener, Newton, Gould, Kalman etc culminating in Linear Quadratic Estimator( LQE). The Linear Quadratic Estimator and Regulator combined to form the Linear Quadratic Gaussian (LQG) compensator.
+% Roots in Non-Linear Programming
+% Kuhn and Tucker proposed necesary conditions for the optimization of a system under inequality constraints. This led to the non-linear programming codes which solve optimal trajectories etc under various constraints. 
+% 
+% \emph{Effects of Technology on Optimal Control}\\
+% The Non-Linear Programming was extremely benifited by the invent of computers. It provided the computational power to handle hundreds and thousands of variables in a Non-Linear Programming problem.
+% 
+% \textbf{Important concepts developed in Optimal Control}:\\
+% 
+% \emph{Dynamic Programming:}\quad 
+% This was invented by Bellman based on the Hamilton-Jacobi equations. It computes a set of extremal paths and an optimal return function along with the feedback required for such paths. These methods are not useful without approximating the system into a Linear Quadratic problem.
+% 
+% \emph{Maximum Principle}: \quad
+% It is based on extending the Weirstrass's necessary condition to bounded control functions. It deals with find one extremum at a time and is different from Dynamic programming
+% 
+% \emph{Calulating NonLinear Optimal Trajectories}
+% First trajectories were proposed for rockets with limited fuel by Godard and were solved both analytically and numerically by various mathematicians. Later Gradient methods were proposed and coded by various people notably Hur and Bryson developed the MATLAB based gradient code. 
+% These problems have been applied to various real life situations in finding the right flight path to achieve a flight altitude in minimum time. Optimal control has also been used in finding optimal aerodynamic shapes etc.
+% 
+% \textbf{Handling of various special Cases in OC}
+% 
+% \emph{Inequality constraints:} \quad
+% Inequalities in control variables were handled by introducing slack variables or penality functions. State inequalities are harder to tackle and have been solved by Dreyfus and Speyer. 
+% \emph{Singular problems:} \quad
+% The cases where the second derivative goes to zero is known as a singular solution. Approximate solutions have been found and are in general difficult to find.
+% \emph{Inverse Optimal Control:} \quad
+% These were required to produce a control history for a required output history. The finding of feasible output histories is hard and involveds collocation methods and Non-Linear Programming concepts
+% \emph{Robust Optimal Control:} \quad
+% Linear Quadratic Gaussian controllers were not entirely robust to change in plant parameters. This came to light in using the controllers for space vehicles and new form of the problems known as $H_\infty$ has been proposed for robustness to unmodelled high frequency and is an ongoing research field.
+% 
+% Thus Optimal Control has a long history in various fields such as Calculus of Variations, Control Theory, Non-Linear Progamming and many other fields. It was applied to various real life problems during World War II  for finding optimal trajectories and also in designing various engineering structures. Many new areas where Optimal control needs to be applied are opening up showing a bright future for the field.
+% 
+% 
+ \end{enumerate} 
+% \begin{acknowledgements}
+% I hereby declare that I have not discussed this homework with anyone. The
+% solutions written here are my own work and  from lecture notes and sample code
+% provided by the professor. The paper summary contains lots of similarities with the original paper Arthur and Bryson ``Optimal Control - 1950-1985'', IEEE Control Systems, 1996
+% 
+% \flushright Gowtham Garimella
+% \end{acknowledgements}
+% 
+
+
+
+\end{document}
