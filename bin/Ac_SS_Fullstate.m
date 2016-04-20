@@ -110,10 +110,13 @@ plot(t,y_sim,'g.',t,y_filter,'r-')
 legend('Simulated signal','Actual Signal')
 title('Simulates signal Vs Actual Signal')
 xlabel('time') % x-axis label
-ylabel('Output Signal after filtering') % y-axis label
+%ylabel('Output Signal after filtering') % y-axis label
 
 
+ set(gca, 'YTickLabelMode', 'manual', 'YTickLabel', []);
 
+
+ set(gca,'Ytick',[]);
 
 
 %%
@@ -143,7 +146,7 @@ stripe = 0.075;
 set(hist_axes,'pos',[pos(1)+stripe*pos(3) pos(2) (1-stripe)*pos(3) pos(4)])
 set(hist_axes,'Units',hist_axes_units_old);
 
-set(hist_axes,'xticklabel','')
+set(hist_axes,'XTickLabel','')
 
 % Create axis for stripe
 stripe_axes = axes('Parent',get(hist_axes,'Parent'),...
@@ -170,7 +173,10 @@ line(limits([1 2 2 1 1]),limits([3 3 4 4 3]),...
     % image(X,Y,C) where C is the RGB color you specify. 
     image(xdata,[0 1],repmat(C1, [1 1 3]),'Parent',stripe_axes);
 
+set(hist_axes, 'YTickLabelMode', 'manual', 'YTickLabel', []);
 
+
+ set(hist_axes,'Ytick',[]);
 %set(stripe_axes,'yticklabel','')
 %axis(stripe_axes,limits);
 
