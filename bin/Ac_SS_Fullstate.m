@@ -7,12 +7,12 @@ S.k=1;
 
 S.m=1;
 S.b=0.1;
-S.freq=5;
+S.freq=20;
 S.omega=2*pi*S.freq;
 S.g=@sense_f;
 S.ff=0.5;%Filter Factor
 
-
+dt=0.001;
 
 % initial state
 x0 = [1;0];
@@ -33,7 +33,7 @@ S.lqrQ = diag([2; 2]);
 
 S.lqrR = 10;
 [~,S.A_sys,S.B_sys]=body_f(x0,S);
-S.C_sys=[-47.1239 0];
+S.C_sys=[-47.1239/5*S.freq 0];
 S.D_sys=0;
 
 [S.lqrgain,~,~] = lqr(S.A_sys,S.B_sys,S.lqrQ,S.lqrR,S.lqrN);
@@ -56,10 +56,10 @@ sys=ss(S.A_sys,S.B_sys,S.C_sys,S.D_sys);
 [~,S.kfgain_sim,~] = kalman(sys,S.kfQ,S.kfR,S.kfN);
 
 
-[t,x]=ode45(@(t,x) SS_overall_f( t,x, S), 0:0.001:tfinal, [S.x0;S.x0-[1;0];zeros(5,1);zeros(5,1)], options); 
+[t,x]=ode45(@(t,x) SS_overall_f( t,x, S), 0:dt:tfinal, [S.x0;S.x0-[1;0];zeros(5,1);zeros(5,1)], options); 
 
 
-[t_sim,x_sim]=ode45(@(tt,xx) sim_f( tt,xx, S), 0:0.001:tfinal, [S.x0-[1;0];S.x0-[1;0]], options_sim); 
+[t_sim,x_sim]=ode45(@(tt,xx) sim_f( tt,xx, S), 0:dt:tfinal, [S.x0-[1;0];S.x0-[1;0]], options_sim); 
 
 for i=1:size(t_sim,1)
 delu_sim(i)=-S.lqrgain*(x_sim(i,3:4)'-S.xd);
