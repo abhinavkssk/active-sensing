@@ -2,8 +2,8 @@
 
 function dx = SS_overall_f( t,x, S)
 t;
-S.xstar=[cos(S.omega*t) -S.omega*sin(S.omega*t)];
-S.ustar=-S.m*S.omega^2*cos(S.omega*t)-S.b*S.omega*sin(S.omega*t);
+S.xstar=S.ampl*[cos(S.omega*t) -S.omega*sin(S.omega*t)];
+S.ustar=S.ampl*(-S.m*S.omega^2*cos(S.omega*t)-S.b*S.omega*sin(S.omega*t));
 S.ystar=sense_nl(S.xstar,S);
 
 x_sys=x(1:2);
@@ -15,15 +15,21 @@ A_sys=S.A_sys;
 B_sys=S.B_sys;
 
 
-[ze,pe,ke] = ellip(5,3,30,S.omega/10,'s');
-[be,ae] = zp2tf(ze,pe,ke);
-[A_f,B_f,C_f,~] = tf2ss(be,ae);
+
+[A_f,B_f,C_f,~] = tf2ss(S.be,S.ae);
 y_filter=C_f*x_fil;
 
 
+if(S.bode==false)
 
 
 delu = -S.lqrgain*(delx_est-S.xd);
+end
+
+if(S.bode==true)
+    delu=sin(S.omega_bode*t);
+end
+
 
 u=delu+S.ustar;
 

@@ -7,7 +7,13 @@ K=S.lqrgain;
 L=S.kfgain_sim;
 x_sys=x(1:2);
 x_est=x(3:4);
-u=-K*(x_est-S.xd);
+if(S.bode==false)
+    u=-K*(x_est-S.xd);
+end
+if(S.bode==true)
+    u=sin(S.omega_bode*t);
+end
+
 dx_sys = A_sys*x_sys +B_sys*u;
  dx_est= A_sys*x_est +B_sys*u+L*C_sys*(x_sys-x_est);%  A_sys-B_sys*K-L*C_sys]*x;
  
