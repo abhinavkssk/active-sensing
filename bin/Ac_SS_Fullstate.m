@@ -158,7 +158,7 @@ plot(t,y_sim,'g.',t,y_filter,'r-')
 %set(objh,'linewidth',10);
 
 legend boxoff;
-title('Simulates Signal vs Actual Signal')
+title('Simulated Signal vs Actual Signal')
 xlabel('time (s)') % x-axis label
 ylabel('Output Signal after filtering') % y-axis label
 if(S.bode)saveas(gcf,['figs/Outpout_',num2str(freq_bode),'.svg']);end
