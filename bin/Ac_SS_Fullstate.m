@@ -2,7 +2,7 @@ function [t,y_filter,sys_with_filter] = Ac_SS_Fullstate(dt_sim,tfinal_bode,freq_
 %clear all;
 close all;
 addpath('../include','-end')
-tfinal=40;
+tfinal=15;
 S.k=1;
 
 S.m=1;
@@ -119,7 +119,7 @@ legend('Est delx ','Actual delx')
 legend boxoff;
 title('Position vs Time')
 xlabel('time (s)') % x-axis label
-ylabel('\deltax_1 (m)') % y-axis label
+ylabel('x_1 (m)') % y-axis label
 if(S.bode)saveas(gcf,['figs/estActX_',num2str(freq_bode),'.svg']);end
 figure;
 
@@ -128,7 +128,7 @@ legend('Est delv ','Actual delv')
 legend boxoff;
 title('Velocity vs Time')
 xlabel('time (s)') % x-axis label
-ylabel('\deltax_2 (m/s)') % y-axis label
+ylabel('x_2 (m/s)') % y-axis label
 if(S.bode)saveas(gcf,['figs/estActvel_',num2str(freq_bode),'.svg']);end
 figure;
 
